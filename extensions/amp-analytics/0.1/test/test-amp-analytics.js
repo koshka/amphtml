@@ -124,9 +124,9 @@ describe('amp-analytics', function() {
         return;
       }
       return new Promise(resolve => {
-        const start = new Date().getTime();
+        const start = Date.now();
         const interval = setInterval(() => {
-          const time = new Date().getTime();
+          const time = Date.now();
           if (sendRequestSpy.callCount > 0 ||
                   opt_max && (time - start) > opt_max) {
             clearInterval(interval);
@@ -446,6 +446,20 @@ describe('amp-analytics', function() {
           'https://example.com/test1=trigger1&test2=config2');
     });
   });
+
+  it('expands element level vars with higher precedence than trigger vars',
+    () => {
+      const ins = instrumentationServiceFor(windowApi);
+      const el1 = windowApi.document.createElement('div');
+      el1.className = 'x';
+      el1.dataset.varsTest = 'foo';
+      ins.addListener(
+        {'on': 'click', 'selector': '.x', 'vars': {'test': 'bar'}},
+        function(arg) {
+          expect(arg.vars.test).to.equal('foo');
+        });
+      ins.onClick_({target: el1});
+    });
 
   it('expands config vars with higher precedence than platform vars', () => {
     const analytics = getAnalyticsTag({
