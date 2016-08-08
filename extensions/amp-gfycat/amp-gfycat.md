@@ -64,12 +64,12 @@ The width and height attributes are special for the Gfycat embed. These should b
 
 Gfycat allows many aspect ratios.
 
+To specify the width and height in the code, please copy it from the embed URL. You can see these values by going to:
+https://gfycat.com/name
+Click on the embed link </>. Copy the width and height specified in the fixed IFRAME field.
+
 **Example:**
 
 ```html
 <iframe src='https://gfycat.com/ifr/TautWhoppingCougar' frameborder='0' scrolling='no' width='640' height='360' allowfullscreen></iframe>
 ```
-
-To specify the width and height in the code, please copy it from the embed URL. You can see these values by going to:
-https://gfycat.com/name
-Click on the embed link </>. Copy the width and height specified in the fixed IFRAME field.

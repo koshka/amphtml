@@ -24,15 +24,18 @@ import {adopt} from '../../../../src/runtime';
 adopt(window);
 
 describe('amp-gfycat', () => {
-  function getGfycat(gfyId, opt_responsive) {
+  function getGfycat(gfyId, opt_params) {
     return createIframePromise().then(iframe => {
       doNotLoadExternalResourcesInTest(iframe.win);
       const gfycat = iframe.doc.createElement('amp-gfycat');
       gfycat.setAttribute('data-gfyid', gfyId);
       gfycat.setAttribute('width', 640);
       gfycat.setAttribute('height', 640);
-      if (opt_responsive) {
+      if (opt_params && opt_params.responsive) {
         gfycat.setAttribute('layout', 'responsive');
+      }
+      if (opt_params && opt_params.autoplayPaused) {
+        gfycat.setAttribute('data-autoplay', '0');
       }
       iframe.doc.body.appendChild(gfycat);
       gfycat.implementation_.layoutCallback();
@@ -52,10 +55,24 @@ describe('amp-gfycat', () => {
   });
 
   it('renders responsively', () => {
-    return getGfycat('LeanMediocreBeardeddragon', true).then(gfycat => {
+    return getGfycat('LeanMediocreBeardeddragon', {
+      responsive: true
+    }).then(gfycat => {
       const iframe = gfycat.querySelector('iframe');
       expect(iframe).to.not.be.null;
       expect(iframe.className).to.match(/-amp-fill-content/);
+    });
+  });
+
+  it('autoplay paused', () => {
+    return getGfycat('LeanMediocreBeardeddragon', {
+      autoplayPaused: true
+    }).then(gfycat => {
+      const iframe = gfycat.querySelector('iframe');
+      gfycat.setAttribute('data-autoplay', '0');
+      expect(iframe).to.not.be.null;
+      expect(iframe.src)
+        .to.equal('https://gfycat.com/ifr/LeanMediocreBeardeddragon?autoplay=0');
     });
   });
 
