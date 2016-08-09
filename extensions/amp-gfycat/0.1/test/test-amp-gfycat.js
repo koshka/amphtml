@@ -56,7 +56,7 @@ describe('amp-gfycat', () => {
 
   it('renders responsively', () => {
     return getGfycat('LeanMediocreBeardeddragon', {
-      responsive: true
+      responsive: true,
     }).then(gfycat => {
       const iframe = gfycat.querySelector('iframe');
       expect(iframe).to.not.be.null;
@@ -66,7 +66,7 @@ describe('amp-gfycat', () => {
 
   it('autoplay paused', () => {
     return getGfycat('LeanMediocreBeardeddragon', {
-      autoplayPaused: true
+      autoplayPaused: true,
     }).then(gfycat => {
       const iframe = gfycat.querySelector('iframe');
       gfycat.setAttribute('data-autoplay', '0');

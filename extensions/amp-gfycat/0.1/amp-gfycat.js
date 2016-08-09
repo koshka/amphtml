@@ -37,7 +37,7 @@ class AmpGfycat extends AMP.BaseElement {
 
   /** @override */
   layoutCallback() {
-    const gfyid = user.assert(
+    const gfyid = user().assert(
       (this.element.getAttribute('data-gfyid') ||
       this.element.getAttribute('gfyid')),
       'The data-gfyid attribute is required for <amp-gfycat> %s',
