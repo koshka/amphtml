@@ -73,3 +73,17 @@ Click on the embed link </>. Copy the width and height specified in the fixed IF
 ```html
 <iframe src='https://gfycat.com/ifr/TautWhoppingCougar' frameborder='0' scrolling='no' width='640' height='360' allowfullscreen></iframe>
 ```
+**data-autoplay**
+
+By default video is autoplaying. It's possible to turn if off by setting `data-autoplay=0`
+
+**Example:**
+
+```html
+  <amp-gfycat
+          data-gfyid="TautWhoppingCougar"
+          width="640"
+          height="360"
+          data-autoplay="0">
+  </amp-gfycat>
+```
